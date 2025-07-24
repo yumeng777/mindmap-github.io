@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>产品经理角色 & AI 带来的变化 - 思维导图</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        
+        .mindmap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+        
+        .central-node {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(238, 90, 36, 0.3);
+            transform: scale(1.1);
+            z-index: 10;
+            position: relative;
+        }
+        
+        .branches {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            width: 100%;
+            margin-top: 50px;
+        }
+        
+        .branch {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .main-branch {
+            background: linear-gradient(135deg, #74b9ff, #0984e3);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+            box-shadow: 0 6px 20px rgba(9, 132, 227, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 200px;
+        }
+        
+        .main-branch:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(9, 132, 227, 0.4);
+        }
+        
+        .sub-branches {
+            display: none;
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .sub-branches.active {
+            display: flex;
+        }
+        
+        .sub-branch {
+            background: linear-gradient(135deg, #a29bfe, #6c5ce7);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(108, 92, 231, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .sub-branch:hover {
+            transform: translateX(5px);
+            background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+        }
+        
+        .details {
+            display: none;
+            background: #f8f9fa;
+            border-left: 4px solid #6c5ce7;
+            padding: 15px;
+            margin-top: 10px;
+            border-radius: 8px;
+            font-size: 13px;
+            line-height: 1.6;
+            color: #2c3e50;
+        }
+        
+        .details.active {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+        
+        .details ul {
+            margin: 5px 0;
+            padding-left: 20px;
+        }
+        
+        .details li {
+            margin: 3px 0;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slideDown {
+            from { opacity: 0; max-height: 0; }
+            to { opacity: 1; max-height: 300px; }
+        }
+        
+        .connection-line {
+            position: absolute;
+            background: #ddd;
+            z-index: 1;
+        }
+        
+        .legend {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f1f2f6;
+            border-radius: 10px;
+            text-align: center;
+            color: #57606f;
+        }
+        
+        @media (max-width: 1200px) {
+            .branches {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .branches {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>产品经理角色 & AI 带来的变化</h1>
+        
+        <div class="mindmap">
+            <div class="central-node">
+                产品经理角色转型<br>AI时代变革
+            </div>
+            
+            <div class="branches">
+                <div class="branch">
+                    <div class="main-branch" onclick="toggleBranch(this, 'traditional')">
+                        传统产品经理<br>核心职责
+                    </div>
+                    <div class="sub-branches" id="traditional">
+                        <div class="sub-branch" onclick="toggleDetails(this, 'need-mgmt')">
+                            需求管理
+                            <div class="details" id="need-mgmt">
+                                <ul>
+                                    <li>用户需求收集与分析</li>
+                                    <li>需求优先级排序</li>
+                                    <li>需求文档撰写</li>
+                                    <li>跨部门需求沟通</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="sub-branch" onclick="toggleDetails(this, 'product-plan')">
+                            产品规划
+                            <div class="details" id="product-plan">
+                                <ul>
+                                    <li>产品路线图制定</li>
+                                    <li>版本规划与迭代</li>
+                                    <li>竞品分析</li>
+                                    <li>市场调研</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="sub-branch" onclick="toggleDetails(this, 'project-coord')">
+                            项目协调
+                            <div class="details" id="project-coord">
+                                <ul>
+                                    <li>跨团队协作管理</li>
+                                    <li>开发进度跟进</li>
+                                    <li>资源协调配置</li>
+                                    <li>风险识别与控制</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="sub-branch" onclick="toggleDetails(this, 'user-exp')">
+                            用户体验
+                            <div class="details" id="user-exp">
+                                <ul>
+                                    <li>用户画像构建</li>
+                                    <li>用户旅程设计</li>
+                                    <li>交互流程优化</li>
+                                    <li>可用性测试</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="branch">
+                    <div class="main-branch" onclick="toggleBranch(this, 'ai-impact')">
+                        AI对工作的<br>影响变化
+                    </div>
+                    <div class="sub-branches" id="ai-impact">
+                        <div class="sub-branch" onclick="toggleDetails(this, 'efficiency')">
+                            工作效率提升
+                            <div class="details" id="efficiency">
+                                <strong>文档处理：</strong>
+                                <ul>
+                                    <li>AI辅助PRD撰写</li>
+                                    <li>自动生成用户故事</li>
+                                    <li>会议纪要智能整理</li>
+                                </ul>
+                                <strong>数据分析：</strong>
+                                <ul>
+                                    <li>用户行为数据挖掘</li>
+                                    <li>自动化报表生成</li>
+                                    <li>趋势预测分析</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="sub-branch" onclick="toggleDetails(this, 'decision')">
+                            决策支持优化
+                            <div class="details" id="decision">
+                                <strong>需求分析：</strong>
+                                <ul>
+                                    <li>智能需求分类</li>
+                                    <li>用户反馈情感分析</li>
+                                    <li>需求影响评估</li>
+                                </ul>
+                                <strong>市场洞察：</strong>
+                                <ul>
+                                    <li>竞品功能对比分析</li>
+                                    <li>市场趋势预测</li>
+                                    <li>用户画像精准构建</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="sub-branch" onclick="toggleDetails(this, 'innovation')">
+                            产品创新赋能
+                            <div class="details" id="innovation">
+                                <strong>功能设计：</strong>
+                                <ul>
+                                    <li>AI驱动的个性化推荐</li>
+                                    <li>智能交互界面设计</li>
+                                    <li>语音/图像识别集成</li>
+                                </ul>
+                                <strong>原型验证：</strong>
+                                <ul>
+                                    <li>智能原型生成</li>
+                                    <li>用户测试自动化</li>
+                                    <li>快速迭代验证</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="branch">
+                    <div class="main-branch" onclick="toggleBranch(this, 'new-content')">
+                        新兴工作<br>内容领域
+                    </div>
+                    <div class="sub-branches" id="new-content">
+                        <div class="sub-branch" onclick="toggleDetails(this, 'ai-product')">
+                            AI产品专项
+                            <div class="details" id="ai-product">
+                                <ul>
+                                    <li>AI算法需求定义</li>
+                                    <li>机器学习模型评估</li>
+                                    <li>数据标注质量管理</li>
+                                    <li>AI伦理与合规审查</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="sub-branch" onclick="toggleDetails(this, 'smart-strategy')">
+                            智能化策略
+                            <div class="details" id="smart-strategy">
+                                <ul>
+                                    <li>AI能力集成规划</li>
+                                    <li>用户数据隐私保护</li>
+                                    <li>算法公平性评估</li>
+                                    <li>智能化ROI分析</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="sub-branch" onclick="toggleDetails(this, 'cross-collab')">
+                            跨界协作
+                            <div class="details" id="cross-collab">
+                                <ul>
+                                    <li>与数据科学家协作</li>
+                                    <li>AI工程师需求对接</li>
+                                    <li>算法专家沟通</li>
+                                    <li>伦理委员会参与</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="branch">
+                    <div class="main-branch" onclick="toggleBranch(this, 'skill-change')">
+                        技能要求<br>变化升级
+                    </div>
+                    <div class="sub-branches" id="skill-change">
+                        <div class="sub-branch" onclick="toggleDetails(this, 'new-skills')">
+                            新增技能需求
+                            <div class="details" id="new-skills">
+                                <strong>技术理解：</strong>
+                                <ul>
+                                    <li>AI/ML基础概念</li>
+                                    <li>数据分析能力</li>
+                                    <li>算法原理理解</li>
+                                </ul>
+                                <strong>数据素养：</strong>
+                                <ul>
+                                    <li>数据驱动思维</li>
+                                    <li>统计分析基础</li>
+                                    <li>指标体系构建</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="sub-branch" onclick="toggleDetails(this, 'enhanced-skills')">
+                            强化现有技能
+                            <div class="details" id="enhanced-skills">
+                                <strong>战略思维：</strong>
+                                <ul>
+                                    <li>长期规划能力</li>
+                                    <li>商业模式创新</li>
+                                    <li>生态系统思维</li>
+                                </ul>
+                                <strong>沟通协调：</strong>
+                                <ul>
+                                    <li>跨专业沟通</li>
+                                    <li>复杂项目管理</li>
+                                    <li>团队领导力</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="branch">
+                    <div class="main-branch" onclick="toggleBranch(this, 'challenges')">
+                        挑战与<br>发展机遇
+                    </div>
+                    <div class="sub-branches" id="challenges">
+                        <div class="sub-branch" onclick="toggleDetails(this, 'main-challenges')">
+                            主要挑战
+                            <div class="details" id="main-challenges">
+                                <strong>技能转型：</strong>
+                                <ul>
+                                    <li>学习曲线陡峭</li>
+                                    <li>知识更新频繁</li>
+                                    <li>跨领域知识要求</li>
+                                </ul>
+                                <strong>工作模式调整：</strong>
+                                <ul>
+                                    <li>人机协作适应</li>
+                                    <li>决策流程变化</li>
+                                    <li>效率期望提升</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="sub-branch" onclick="toggleDetails(this, 'opportunities')">
+                            发展机遇
+                            <div class="details" id="opportunities">
+                                <strong>职业价值提升：</strong>
+                                <ul>
+                                    <li>战略层面参与度增加</li>
+                                    <li>创新项目主导权</li>
+                                    <li>跨部门影响力扩大</li>
+                                </ul>
+                                <strong>新兴领域拓展：</strong>
+                                <ul>
+                                    <li>AI产品专家</li>
+                                    <li>数据产品经理</li>
+                                    <li>智能化转型顾问</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="branch">
+                    <div class="main-branch" onclick="toggleBranch(this, 'future-trends')">
+                        未来发展<br>趋势预测
+                    </div>
+                    <div class="sub-branches" id="future-trends">
+                        <div class="sub-branch" onclick="toggleDetails(this, 'role-evolution')">
+                            角色演进方向
+                            <div class="details" id="role-evolution">
+                                <ul>
+                                    <li>从执行者向战略家转变</li>
+                                    <li>从功能导向向价值导向</li>
+                                    <li>从单一技能向复合能力</li>
+                                    <li>从被动响应向主动创新</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="sub-branch" onclick="toggleDetails(this, 'work-change')">
+                            工作方式变革
+                            <div class="details" id="work-change">
+                                <ul>
+                                    <li>智能化工具深度集成</li>
+                                    <li>数据驱动决策常态化</li>
+                                    <li>敏捷迭代速度加快</li>
+                                    <li>用户共创模式普及</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="sub-branch" onclick="toggleDetails(this, 'industry-impact')">
+                            行业影响
+                            <div class="details" id="industry-impact">
+                                <ul>
+                                    <li>产品开发周期缩短</li>
+                                    <li>个性化服务标准提升</li>
+                                    <li>跨行业融合加速</li>
+                                    <li>商业模式持续创新</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="legend">
+            <p><strong>使用说明：</strong>点击主分支展开子分支，点击子分支查看详细内容</p>
+            <p>本思维导图全面展示了AI时代产品经理角色的变化与发展趋势</p>
+        </div>
+    </div>
+
+    <script>
+        function toggleBranch(element, branchId) {
+            const subBranches = document.getElementById(branchId);
+            const isActive = subBranches.classList.contains('active');
+            
+            // 关闭所有其他分支
+            document.querySelectorAll('.sub-branches').forEach(branch => {
+                branch.classList.remove('active');
+            });
+            
+            // 关闭所有详情
+            document.querySelectorAll('.details').forEach(detail => {
+                detail.classList.remove('active');
+            });
+            
+            // 切换当前分支
+            if (!isActive) {
+                subBranches.classList.add('active');
+            }
+        }
+        
+        function toggleDetails(element, detailId) {
+            const details = document.getElementById(detailId);
+            const isActive = details.classList.contains('active');
+            
+            // 关闭所有其他详情
+            document.querySelectorAll('.details').forEach(detail => {
+                detail.classList.remove('active');
+            });
+            
+            // 切换当前详情
+            if (!isActive) {
+                details.classList.add('active');
+            }
+        }
+        
+        // 添加键盘导航支持
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.sub-branches, .details').forEach(element => {
+                    element.classList.remove('active');
+                });
+            }
+        });
+        
+        // 添加平滑滚动效果
+        document.addEventListener('DOMContentLoaded', function() {
+            const branches = document.querySelectorAll('.main-branch');
+            branches.forEach((branch, index) => {
+                branch.style.animationDelay = `${index * 0.1}s`;
+                branch.style.animation = 'fadeIn 0.6s ease forwards';
+            });
+        });
+    </script>
+</body>
+</html>
